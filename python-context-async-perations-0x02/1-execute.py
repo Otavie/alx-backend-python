@@ -18,3 +18,8 @@ class ExecuteQuery:
     def __exit__(self, exc_type, exc_val, exc_tb):
         if self.conn:
             self.conn.close()
+            
+with ExecuteQuery('users.db', 'SELECT * FROM users WHERE age > ?', (25,)) as cursor:
+    results = cursor.fetchall()  
+    for row in results:
+        print(row)
